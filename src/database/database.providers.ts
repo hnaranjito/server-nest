@@ -10,7 +10,7 @@ export const databaseProviders = [
         port: 3306,
         username: 'root',
         password: '3winf02014',
-        database: 'test',
+        database: 'post',
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: true,
       });

@@ -16,14 +16,22 @@ export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Get()
-  getMany() {
-    return this.postService.getMany();
+  async getMany() {
+    const data = await this.postService.getMany();
+    return {
+      message: 'Petición correcta',
+      data,
+    };
   }
 
   @Get(':id')
-  getOne(@Param('id', ParseIntPipe) id: number) {
+  async getOne(@Param('id', ParseIntPipe) id: number) {
     //console.log(typeof id);
-    return this.postService.getOne(id);
+    const data = await this.postService.getOne(id);
+    return {
+      message: 'Petición correcta',
+      data,
+    };
   }
 
   @Post()
