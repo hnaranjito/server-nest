@@ -15,7 +15,9 @@ export class PostService {
   }
 
   async getOne(id: number) {
-    const post = await this.postRepository.findOneBy(id as any);
+    const post = await this.postRepository.findOneBy({
+      id: id,
+    });
 
     if (!post) throw new NotFoundException('No se encontraron datos');
     return post;
@@ -27,10 +29,21 @@ export class PostService {
   }
 
   async editOne(id: number, dto: editPostDto) {
-    const post = this.postRepository.findOne(id as any);
+    const post = await this.postRepository.findOneBy({
+      id: id,
+    });
     if (!post) throw new NotFoundException('Post does not exist');
+    const editedPost = new Post();
 
-    const editedPost = Object.assign(post, dto);
+    editedPost.id = post.id;
+    editedPost.slug = post.slug;
+    editedPost.title = post.title;
+    editedPost.excerpt = post.excerpt;
+    editedPost.content = post.content;
+    editedPost.status = post.status;
+    editedPost.tags = post.tags;
+    editedPost.category = post.category;
+
     return await this.postRepository.save(editedPost);
   }
 
