@@ -1,4 +1,4 @@
-import { Body, Injectable, Inject, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { createPostDto, editPostDto } from './dtos';
 import { Repository } from 'typeorm';
 import { Post } from './entities/post.entity';
