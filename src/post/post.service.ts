@@ -2,6 +2,8 @@ import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { createPostDto, editPostDto } from './dtos';
 import { Repository } from 'typeorm';
 import { Post } from './entities/post.entity';
+import {} from '../database/database.providers';
+import { title } from 'process';
 
 @Injectable()
 export class PostService {
@@ -33,17 +35,15 @@ export class PostService {
       id: id,
     });
     if (!post) throw new NotFoundException('Post does not exist');
-    const editedPost = new Post();
 
-    editedPost.id = post.id;
-    editedPost.slug = post.slug;
+    /*const editedPost = new Post();
+
     editedPost.title = post.title;
     editedPost.excerpt = post.excerpt;
     editedPost.content = post.content;
-    editedPost.status = post.status;
-    editedPost.tags = post.tags;
-    editedPost.category = post.category;
+    editedPost.status = post.status;*/
 
+    const editedPost = Object.assign(post, dto);
     return await this.postRepository.save(editedPost);
   }
 
